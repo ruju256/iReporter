@@ -49,9 +49,48 @@
                 </li>
             </ul>
         </nav>
-
         <content>
-          
+            <h3>New Intervation Record</h3>                        
+            <form class="cd-form" method="post">
+                <p class="fieldset">
+                    <label for="nature">Nature of record (repair bad road sections, collapsed bridges, flooding)</label>
+                    <input class="full-width has-padding has-border" id="nature" type="text" required>
+                    <span class="cd-error-message">Error message here!</span>
+                </p>
+
+                <p class="fieldset">
+                    <label  for="location">Name of Location (commonly known name)</label>
+                    <input class="full-width has-padding has-border" id="location" type="text" required>
+                    <span class="cd-error-message">Error message here!</span>
+                </p>
+                <p class="fieldset">
+                    <label  for="description">Description of record or incident</label>
+                    <textarea class="full-width has-padding has-border" id="description" type="text" required cols="80" rows="10"></textarea>
+                    <span class="cd-error-message">Error message here!</span>
+                </p>
+                <p class="fieldset">
+                    <label  for="location">Upload Image or video of record(optional)</label>
+                    <input class="full-width has-padding has-border" id="location" type="file">
+                    <span class="cd-error-message">Error message here!</span>
+                </p>
+                <p class="fieldset">
+                    <label  for="location">Press button to get current location</label><br/>
+                    <button onclick="getLocation()">Get Current Location</button>
+                </p>
+                
+                <p class="fieldset" id="cordinates">                    
+                    
+                    <label  for="location">Latitude</label>
+                    <input class=" has-padding has-border" id="Latitude" type="text" value="" >
+                    <label  for="location">Longitude</label>
+                    <input class=" has-padding has-border" id="Longitude" type="text" value="">
+                    <span class="cd-error-message">Error message here!</span>
+                </p>
+
+                <p class="fieldset">
+                    <input class="full-width has-padding" type="submit" value="New Intervation Record">
+                </p>
+            </form>              
         </content>
 
 
@@ -85,3 +124,28 @@
         </svg>
     </body>
 </html>
+
+<script>
+    var x = document.getElementById("cordinates");
+
+    function getLocation()
+    {
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else{
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(event)
+    {
+        document.getElementById("Latitude").value = event.coords.latitude;
+        document.getElementById("Longitude").value = event.coords.longitude;
+    }
+    // If something has gone wrong with the geolocation request
+    function onGeoError(event)
+    {
+        alert("Error code " + event.code + ". " + event.message);
+    }
+</script>
